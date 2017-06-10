@@ -9,16 +9,20 @@ class Suggestion(db.Model):
     first_name = db.Column(db.Text)
 
     id = db.Column(db.Integer, primary_key=True)
-    public_flagged = db.Column(db.Boolean)
-    moderator_flagged = db.Column(db.Boolean)
+    status_flagged = db.Column(db.Boolean, default=False)
+    status_reviewed = db.Column(db.Boolean, default=False)
+    status_visible = db.Column(db.Boolean)
     view_count = db.Column(db.Integer)
     dt = db.Column(db.DateTime, default=datetime.datetime.now)
 
-    def __init__(self, first_name, title, text):
-        self.first_name = first_name
+    def __init__(self, title, text, first_name):
         self.title = title
         self.text = text
+        self.first_name = first_name
         self.view_count = 0
+
+        # TODO: set this as a config variable?
+        self.status_visible = True
 
 
     def __repr__(self):
