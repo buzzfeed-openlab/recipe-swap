@@ -4,9 +4,12 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      <p>A suggestion from {{random_suggestion.first_name}}:</p>
-      <h1>{{random_suggestion.title}}</h1>
-      <p>{{random_suggestion.text}}</p>
+      <h1>Thanks!</h1>
+
+      <a href="{{ url_for('contribute') }}">
+        Contribute another
+      </a>
+
     </div>
   </div>
 </div>

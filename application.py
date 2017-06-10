@@ -14,9 +14,27 @@ application = create_app()
 
 @application.route("/")
 def index():
-    # TODO: grab some recordings to show
-    return render_template('index.html')
 
+    random_suggestion = Suggestion.query.filter_by(status_visible=True).order_by(func.rand()).first()
+
+    return render_template('index.html', random_suggestion=random_suggestion)
+
+
+@application.route("/contribute", methods=['GET', 'POST'])
+def contribute():
+    if request.method == 'POST':
+
+        new = Suggestion(
+            request.form['title'],
+            request.form['text'],
+            request.form['first_name']
+        )
+        db.session.add(new)
+        db.session.commit()
+
+        return render_template('thanks.html')
+    else:
+        return render_template('contribute.html')
 
 
 @application.route("/rollback", methods=['GET', 'POST'])
