@@ -4,22 +4,25 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      <h1>Contribute</h1>
+      <div class="padding"></div>
+      <h1>suggest a recipe for others to see!</h1>
+
+      <br/>
 
       <form action="{{ url_for('contribute') }}" method="post">
         <div class="form-group">
-          <label for="recipe-title">Recipe title</label>
+          <label for="recipe-title">recipe title</label>
           <input type="text" class="form-control" name="title" id="recipe-title" placeholder="your recipe">
         </div>
         <div class="form-group">
-          <label for="recipe-text">Recipe</label>
+          <label for="recipe-text">recipe</label>
           <textarea type="text" class="form-control" name="text" id="recipe-text" placeholder="write the recipe here or include a link. feel free to add personal notes or context!"></textarea>
         </div>
         <div class="form-group">
-          <label for="first-name">Your first name</label>
+          <label for="first-name">your first name</label>
           <input type="text" class="form-control" name="first_name" id="first-name" placeholder="(optional)">
         </div>
-        <input class="btn btn-default" type="submit" value="Submit">
+        <input class="btn btn-success" type="submit" value="SUBMIT">
       </form>
 
     </div>

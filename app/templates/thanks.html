@@ -4,10 +4,16 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      <h1>Thanks!</h1>
-
-      <a href="{{ url_for('contribute') }}">
-        Contribute another
+      <div class="padding"></div>
+      <h1>THANKS!</h1>
+      <br/><br/>
+      <a class="btn btn-default" href="{{ url_for('contribute') }}">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        suggest another recipe
+      </a>
+      <a class="btn btn-default" href="{{ url_for('contribute') }}">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        homepage
       </a>
 
     </div>

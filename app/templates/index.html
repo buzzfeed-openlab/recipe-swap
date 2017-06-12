@@ -4,7 +4,14 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      <p>A suggestion from {{random_suggestion.first_name}}:</p>
+      <div class="padding"></div>
+      <p class="text-muted">
+        here's a suggestion from <strong>{{random_suggestion.first_name}}</strong>:
+        <a href="{{ url_for('contribute') }}" class="btn btn-success pull-right">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          SUGGEST A RECIPE
+        </a>
+      </p>
       <h1>{{random_suggestion.title}}</h1>
       <p>{{random_suggestion.text}}</p>
     </div>
