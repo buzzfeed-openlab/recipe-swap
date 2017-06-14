@@ -11,7 +11,6 @@
           SUGGEST A RECIPE
         </a>
       </p>
-      <br/><br/>
       <p class="text-muted">
         {% if random_suggestion.first_name %}
           here's a suggestion from <strong>{{random_suggestion.first_name}}</strong>:
@@ -21,7 +20,7 @@
       </p>
       <h1>{{random_suggestion.title}}</h1>
       <br/>
-      <p>{{random_suggestion.text|nl2br}}</p>
+      <p>{{random_suggestion.text|url2link|nl2br}}</p>
 
       <br/><br/>
       <a href="{{ url_for('flag', suggestion_id=random_suggestion.id) }}" class="link-flag small">

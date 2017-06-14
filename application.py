@@ -138,6 +138,26 @@ def nl2br(eval_ctx, value):
         result = Markup(result)
     return result
 
+@application.template_filter()
+@evalcontextfilter
+def url2link(eval_ctx, value):
+
+    # DUCT TAPE: regex to turn urls into working links
+    _url = re.compile(r'(?:(http://|https://)|(www\.))(\S+\b/?)([!"#$%&\'()*+,\-./:;<=>?@[\\\]^_`{|}~]*)(\s|$)', re.I)
+
+    def replace(match):
+        groups = match.groups()
+        protocol = groups[0] or ''  # may be None
+        www_lead = groups[1] or ''  # may be None
+        return '<a href="{0}{1}{2}" target="_blank">{0}{1}{2}</a>{3}{4}'.format(
+            protocol, www_lead, *groups[2:])
+
+    result = _url.sub(replace, value)
+    if eval_ctx.autoescape:
+        result = Markup(result)
+
+    return result
+
 
 
 
