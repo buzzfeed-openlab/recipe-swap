@@ -6,3 +6,11 @@
 .text-muted {
   color: #aaa;
 }
+
+a.link-flag, a.link-flag:active, a.link-flag:visited {
+  color: #ddd;
+}
+a.link-flag:hover {
+  color: #ef4836;
+  text-decoration: none;
+}

@@ -1,7 +1,9 @@
-from flask import redirect, request, render_template, Response, session
+from flask import redirect, request, render_template, Response, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
 from functools import wraps
+from jinja2 import evalcontextfilter, Markup, escape
+import re
 
 from app import create_app
 from app.app_config import ADMIN_USER, ADMIN_PASS, SECRET_KEY
@@ -16,6 +18,8 @@ application = create_app()
 def index():
 
     random_suggestion = Suggestion.query.filter_by(status_visible=True).order_by(func.rand()).first()
+
+    # TODO: process urls so that they show up as working hyperlinks
 
     return render_template('index.html', random_suggestion=random_suggestion)
 
@@ -70,7 +74,7 @@ def requires_auth(f):
 @requires_auth
 def review():
     # TODO: suggestions that are flagged and haven't been moderated
-    review_queue = Suggestion.query.filter_by(public_flagged=True).all()
+    review_queue = Suggestion.query.filter_by(status_flagged=True).all()
     return render_template('review.html', review_queue = review_queue)
 
 @application.route('/reviewtrash')
@@ -79,6 +83,20 @@ def reviewtrash():
     # TODO: suggestions that have been disapproved by moderator
     disapproved = Suggestion.query.filter_by(moderator_flagged=True).all()
     return render_template('reviewtrash.html', disapproved=disapproved)
+
+
+@application.route('/flag/<suggestion_id>')
+def flag(suggestion_id):
+    s = Suggestion.query.get(suggestion_id)
+    s.status_flagged = True
+
+    # if this hasn't already been seen by moderator, hide from public
+    if s.status_reviewed == False:
+        s.status_visible = False
+
+    db.session.commit()
+    flash("ugh, sorry about that! thanks for reporting.")
+    return redirect('/')
 
 
 @application.route('/approve/<suggestion_id>')
@@ -104,6 +122,23 @@ def initialize():
     # TODO: only do this if tables don't exist?
     db.create_all()
     return redirect('/')
+
+
+
+
+
+@application.template_filter()
+@evalcontextfilter
+def nl2br(eval_ctx, value):
+    _paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
+
+    result = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') \
+        for p in _paragraph_re.split(escape(value)))
+    if eval_ctx.autoescape:
+        result = Markup(result)
+    return result
+
+
 
 
 

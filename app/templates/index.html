@@ -5,15 +5,29 @@
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
       <div class="padding"></div>
-      <p class="text-muted">
-        here's a suggestion from <strong>{{random_suggestion.first_name}}</strong>:
+      <p>
         <a href="{{ url_for('contribute') }}" class="btn btn-success pull-right">
           <i class="fa fa-plus" aria-hidden="true"></i>
           SUGGEST A RECIPE
         </a>
       </p>
+      <br/><br/>
+      <p class="text-muted">
+        {% if random_suggestion.first_name %}
+          here's a suggestion from <strong>{{random_suggestion.first_name}}</strong>:
+        {% else %}
+          an anonymous suggestion:
+        {% endif %}
+      </p>
       <h1>{{random_suggestion.title}}</h1>
-      <p>{{random_suggestion.text}}</p>
+      <br/>
+      <p>{{random_suggestion.text|nl2br}}</p>
+
+      <br/><br/>
+      <a href="{{ url_for('flag', suggestion_id=random_suggestion.id) }}" class="link-flag small">
+        <i class="fa fa-flag" aria-hidden="true"></i> flag as inappropriate
+      </a>
+
     </div>
   </div>
 </div>
