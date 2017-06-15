@@ -1,5 +1,11 @@
+body {
+  background-color: #2C3E50;
+  color: #282830;
+}
+
+
 .padding {
-  height: 80px;
+  height: 40px;
 }
 
 
@@ -7,10 +13,32 @@
   color: #aaa;
 }
 
+a, a:hover, a:active, a:visited {
+  color: #2C3E50;
+  text-decoration: none;
+}
+a.link-flag{
+  font-family: "Helvetica Neue";
+}
 a.link-flag, a.link-flag:active, a.link-flag:visited {
   color: #ddd;
 }
-a.link-flag:hover {
+a.link-flag:hover, a.link-flag:hover .hide-til-hover {
   color: #ef4836;
-  text-decoration: none;
+}
+a.link-flag .hide-til-hover {
+  color: transparent;
+}
+
+
+.recipe {
+  background-image: url("/static/bg-paper.png");
+  font-family: 'Permanent Marker', cursive;
+  font-size: 140%;
+}
+.recipe h1 {
+  font-family: 'Permanent Marker', cursive;
+}
+.recipe p {
+    margin: 0 0 4px;
 }
