@@ -11,14 +11,18 @@
         </thead>
         <tbody>
           {% for suggestion in review_queue %}
-          <tr class="bg-info">
-            <td>{{ suggestion.title }}</td>
+          <tr>
+            <td>
+              <a href="{{ url_for('reviewrecipe', suggestion_id=suggestion.id) }}">
+                {{ suggestion.title }}
+              </a>
+            </td>
             <td class="text-right">
               <div class="btn-group" role="group">
-                <a class="btn btn-success btn-sm" href="/approve/{{ suggestion.id }}">
+                <a class="btn btn-success btn-sm" href="{{ url_for('approve', suggestion_id=suggestion.id) }}">
                   <i class="fa fa-fw fa-check"></i>
                 </a>
-                <a class="btn btn-danger btn-sm" href="/disapprove/{{ suggestion.id }}">
+                <a class="btn btn-danger btn-sm" href="{{ url_for('disapprove', suggestion_id=suggestion.id) }}">
                   <i class="fa fa-fw fa-times"></i>
                 </a>
               </div>
@@ -27,6 +31,11 @@
           {% endfor %}
         </tbody>
       </table>
+
+      <a href="{{ url_for('reviewtrash') }}" class="btn btn-default">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        view disapproved
+      </a>
 
     </div>
   </div>

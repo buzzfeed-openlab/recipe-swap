@@ -85,16 +85,29 @@ def requires_auth(f):
 @requires_auth
 def review():
     # TODO: suggestions that are flagged and haven't been moderated
-    review_queue = Suggestion.query.filter_by(status_flagged=True).all()
+    review_queue = Suggestion.query\
+                            .filter_by(status_flagged=True)\
+                            .filter_by(status_reviewed=False)\
+                            .all()
     return render_template('review.html', review_queue = review_queue)
 
 @application.route('/reviewtrash')
 @requires_auth
 def reviewtrash():
     # TODO: suggestions that have been disapproved by moderator
-    disapproved = Suggestion.query.filter_by(moderator_flagged=True).all()
+    disapproved = Suggestion.query\
+                            .filter_by(status_reviewed=True)\
+                            .filter_by(status_visible=False)\
+                            .all()
     return render_template('reviewtrash.html', disapproved=disapproved)
 
+
+@application.route('/reviewrecipe/<suggestion_id>')
+@requires_auth
+def reviewrecipe(suggestion_id):
+    s = Suggestion.query.get(suggestion_id)
+
+    return render_template('reviewrecipe.html', suggestion=s)
 
 @application.route('/flag/<suggestion_id>')
 def flag(suggestion_id):
@@ -114,7 +127,8 @@ def flag(suggestion_id):
 @requires_auth
 def approve(suggestion_id):
     s = Suggestion.query.get(suggestion_id)
-    s.is_approved = True
+    s.status_reviewed = True
+    s.status_visible = True
     db.session.commit()
     return redirect('/review')
 
@@ -122,7 +136,8 @@ def approve(suggestion_id):
 @requires_auth
 def disapprove(suggestion_id):
     s = Suggestion.query.get(suggestion_id)
-    s.is_approved = False
+    s.status_reviewed = True
+    s.status_visible = False
     db.session.commit()
     return redirect('/review')
 
