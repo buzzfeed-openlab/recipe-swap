@@ -21,7 +21,18 @@ def index():
 
     # TODO: process urls so that they show up as working hyperlinks
 
-    return render_template('index.html', random_suggestion=random_suggestion)
+    return render_template('index.html', random_suggestion=random_suggestion, is_permalink=False)
+
+
+@application.route('/recipe/<suggestion_id>')
+def recipe(suggestion_id):
+    s = Suggestion.query.get(suggestion_id)
+
+    # hide recipe if inappropriate
+    if s and s.status_visible == False:
+        s = None
+
+    return render_template('index.html', random_suggestion=s, is_permalink=True)
 
 
 @application.route("/contribute", methods=['GET', 'POST'])

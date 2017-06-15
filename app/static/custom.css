@@ -1,6 +1,8 @@
 body {
-  background-color: #2C3E50;
+  /*background-color: #2C3E50;*/
+  background-color: #F4B350;
   color: #282830;
+  font-family: 'Abel', sans-serif;
 }
 
 
@@ -17,9 +19,6 @@ a, a:hover, a:active, a:visited {
   color: #2C3E50;
   text-decoration: none;
 }
-a.link-flag{
-  font-family: "Helvetica Neue";
-}
 a.link-flag, a.link-flag:active, a.link-flag:visited {
   color: #ddd;
 }
@@ -33,10 +32,9 @@ a.link-flag .hide-til-hover {
 
 .recipe {
   background-image: url("/static/bg-paper.png");
-  font-family: 'Permanent Marker', cursive;
   font-size: 140%;
 }
-.recipe h1 {
+.recipe h1, p {
   font-family: 'Permanent Marker', cursive;
 }
 .recipe p {
