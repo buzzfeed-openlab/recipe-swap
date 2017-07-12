@@ -6,21 +6,28 @@
     <div class="col-sm-10 col-sm-offset-1">
       <div class="padding"></div>
       <div class="row">
-        <a href="{{ url_for('contribute') }}" class="btn btn-success pull-right">
-          <i class="fa fa-plus" aria-hidden="true"></i>
-          ADD YOUR RECIPE
-        </a>
+        <h1>
+          <i class="fa fa-heart-o" aria-hidden="true"></i>
+          Favorite Family Foods
+          <i class="fa fa-heart-o" aria-hidden="true"></i>
+
+          <a href="{{ url_for('contribute') }}" class="btn btn-success btn-lg pull-right">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            add yours
+          </a>
+        </h1>
       </div>
       <div class="padding"></div>
+
       <div class="row recipe">
         <div class="col-sm-10 col-sm-offset-1">
           <div class="padding"></div>
           {% if random_suggestion %}
             <p class="text-muted">
               {% if random_suggestion.first_name %}
-                here's a suggestion from <strong>{{random_suggestion.first_name}}</strong>:
+                here's a random family recipe from <strong>{{random_suggestion.first_name}}</strong>:
               {% else %}
-                an anonymous suggestion:
+                here's a random family recipe, submitted anonymously:
               {% endif %}
             </p>
             <h1>{{random_suggestion.title}}</h1>
@@ -29,8 +36,8 @@
 
             <br/><br/>
             {% if not is_permalink %}
-            <a href="{{ url_for('recipe', suggestion_id=random_suggestion.id) }}" class="link-permalink small">
-              <i class="fa fa-link" aria-hidden="true"></i> permalink
+            <a href="{{ url_for('recipe', suggestion_id=random_suggestion.id) }}" class="link-permalink small" title="go to permalink">
+              <i class="fa fa-link" aria-hidden="true"></i>
             </a> &nbsp;&nbsp;
             {% endif %}
             <a href="{{ url_for('flag', suggestion_id=random_suggestion.id) }}" class="link-flag small">
