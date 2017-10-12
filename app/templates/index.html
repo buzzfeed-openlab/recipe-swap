@@ -7,9 +7,7 @@
       <div class="padding"></div>
       <div class="row">
         <h1>
-          <i class="fa fa-heart-o" aria-hidden="true"></i>
-          Favorite Family Foods
-          <i class="fa fa-heart-o" aria-hidden="true"></i>
+          <span class="marker">Favorite Family Foods</span>
 
           <a href="{{ url_for('contribute') }}" class="btn btn-success btn-lg pull-right">
             <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -24,13 +22,15 @@
           <div class="padding"></div>
           {% if random_suggestion %}
             <p class="text-muted">
+              <i class="fa fa-heart-o" aria-hidden="true"></i>
               {% if random_suggestion.first_name %}
-                here's a random family recipe from <strong>{{random_suggestion.first_name}}</strong>:
+                here's a random family recipe from <strong>{{random_suggestion.first_name }}</strong>
               {% else %}
-                here's a random family recipe, submitted anonymously:
+                here's a random family recipe, submitted anonymously
               {% endif %}
+              <i class="fa fa-heart-o" aria-hidden="true"></i>
             </p>
-            <h1>{{random_suggestion.title}}</h1>
+            <h1>{{random_suggestion.title }}</h1>
             <br/>
             <p>{{random_suggestion.text|url2link|nl2br}}</p>
 

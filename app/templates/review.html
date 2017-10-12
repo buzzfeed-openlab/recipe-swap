@@ -32,6 +32,27 @@
         </tbody>
       </table>
 
+      <h1>all visible recipes</h1>
+      <table class="table table-condensed small">
+        <thead>
+          <tr><th>Suggestion</th><th class="col-xs-3"></th></tr>
+        </thead>
+        <tbody>
+          {% for suggestion in visible %}
+          <tr>
+            <td>
+              <a href="{{ url_for('reviewrecipe', suggestion_id=suggestion.id) }}">
+                {{ suggestion.title }}
+              </a>
+            </td>
+            <td class="text-right">
+              {{ suggestion.dt.strftime('%m/%d %H:%m') }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
       <a href="{{ url_for('reviewtrash') }}" class="btn btn-default">
         <i class="fa fa-trash" aria-hidden="true"></i>
         view disapproved

@@ -1,7 +1,5 @@
 body {
-  /*background-color: #2C3E50;*/
-  /*background-color: #F4B350;*/
-  background-color: #eee;
+  background-color: #f2f2f2;
   color: #282830;
   font-family: 'Imprima', sans-serif;
 }
@@ -14,6 +12,9 @@ body {
 
 .text-muted {
   color: #aaa;
+}
+.marker {
+  font-family: 'Permanent Marker', cursive;
 }
 
 a, a:hover, a:active, a:visited {
@@ -36,7 +37,7 @@ a.link-flag .hide-til-hover {
   font-size: 140%;
 }
 .recipe h1, p {
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Imprima', sans-serif;
 }
 .recipe p {
     margin: 0 0 4px;

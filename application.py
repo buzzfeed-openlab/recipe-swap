@@ -39,10 +39,14 @@ def recipe(suggestion_id):
 def contribute():
     if request.method == 'POST':
 
+        form_text = request.form['text']
+        form_title = request.form['title']
+        form_firstname = request.form['first_name']
+
         new = Suggestion(
-            request.form['title'],
-            request.form['text'],
-            request.form['first_name']
+            form_title,
+            form_text,
+            form_firstname
         )
         db.session.add(new)
         db.session.commit()
@@ -56,7 +60,7 @@ def contribute():
 def rollback():
     # TODO: figure out what's going on???
     db.session.rollback()
-    return redirect('/respond')
+    return redirect('/')
 
 
 def check_auth(username, password):
@@ -89,7 +93,10 @@ def review():
                             .filter_by(status_flagged=True)\
                             .filter_by(status_reviewed=False)\
                             .all()
-    return render_template('review.html', review_queue = review_queue)
+    visible = Suggestion.query\
+                            .filter_by(status_visible=True)\
+                            .all()
+    return render_template('review.html', review_queue = review_queue, visible=visible)
 
 @application.route('/reviewtrash')
 @requires_auth
@@ -145,7 +152,6 @@ def disapprove(suggestion_id):
 @application.route('/initialize')
 @requires_auth
 def initialize():
-    # TODO: only do this if tables don't exist?
     db.create_all()
     return redirect('/')
 
@@ -190,5 +196,4 @@ def url2link(eval_ctx, value):
 
 if __name__ == "__main__":
 
-    application.secret_key = SECRET_KEY
-    application.run(debug=True, host='0.0.0.0')
+    application.run(host='0.0.0.0')

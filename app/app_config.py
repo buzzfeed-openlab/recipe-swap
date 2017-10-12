@@ -6,7 +6,7 @@ import os
 # if app_config_secret.py exists, use that to set config variables
 if os.path.isfile(os.path.dirname(__file__)+'/app_config_secret.py'):
     from .app_config_secret import DB_USER, DB_PW, DB_HOST, DB_NAME, \
-                                    ADMIN_USER, ADMIN_PASS, SECRET_KEY
+                                    ADMIN_USER, ADMIN_PASS, SECRET_KEY, DEBUG
 
 # otherwise, set config variables from environment variables,
 # & assigns them to defaults if env vars don't exist
@@ -21,3 +21,5 @@ else:
     ADMIN_PASS = os.getenv('ADMIN_PASS', 'something-secret')
 
     SECRET_KEY = os.getenv('SECRET_KEY', 'another-secret-thing')
+
+    SECRET_KEY = os.getenv('DEBUG', 'False')
