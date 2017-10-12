@@ -1,7 +1,7 @@
 body {
   background-color: #f2f2f2;
   color: #282830;
-  font-family: 'Imprima', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 
@@ -34,11 +34,23 @@ a.link-flag .hide-til-hover {
 
 .recipe {
   background-image: url("/static/bg-paper.png");
-  font-size: 140%;
+  font-size: 120%;
 }
 .recipe h1, p {
   font-family: 'Imprima', sans-serif;
 }
 .recipe p {
     margin: 0 0 4px;
+}
+
+
+.btn-success {
+  background-color: #91B496;
+  color: #282830;
+  border: none;
+  border-radius: 0px;
+}
+.btn-success:hover, .btn-success:active {
+  background-color: #7da683;
+  color: #282830;
 }
