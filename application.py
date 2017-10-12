@@ -6,7 +6,7 @@ from jinja2 import evalcontextfilter, Markup, escape
 import re
 
 from app import create_app
-from app.app_config import ADMIN_USER, ADMIN_PASS, SECRET_KEY
+from app.config import CONFIG_VARS
 from app.models import Suggestion
 from app.database import db
 
@@ -67,7 +67,7 @@ def check_auth(username, password):
     """This function is called to check if a username /
     password combination is valid.
     """
-    return username == ADMIN_USER and password == ADMIN_PASS
+    return username == CONFIG_VARS['ADMIN_USER'] and password == CONFIG_VARS['ADMIN_PASS']
 
 def authenticate():
     """Sends a 401 response that enables basic auth"""
